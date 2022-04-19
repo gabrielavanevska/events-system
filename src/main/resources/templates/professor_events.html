@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Professor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/" style="height: 47px"></a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="fa fa-user"></span>
+                            <th:block th:text="${username}"></th:block>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-3" href="/logout">
+                            <i class="fa fa-sign-out"></i>
+                            <span>Одјава</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<section>
+    <div>
+        <div class="container mb-4" style="margin-top: 50px">
+            <div style="border: 1px solid gray; width: 80%;
+            padding-left: 35px; padding-bottom: 15px; padding-top: 5px;
+            margin-left: 10%; background: #f5f5f5">
+                <p style="font-size: 20px">Внесете настан</p>
+                <form action="/professor" method="POST">
+                    <div class="row">
+                        <input type="text" id="title" name="title" required class="form-control ml-2"
+                               style="width: 200px">
+                        <select class="form-control ml-2" id="day" name="day" style="width: 200px">
+                            <option value="Понеделник">Понеделник</option>
+                            <option value="Вторник">Вторник</option>
+                            <option value="Среда">Среда</option>
+                            <option value="Четврток">Четврток</option>
+                            <option value="Петок">Петок</option>
+                            <option value="Сабота">Сабота</option>
+                        </select>
+                        <input type="time" id="timeFrom" name="timeFrom" required class="form-control ml-2"
+                               placeholder="12:00" style="width: 200px">
+                        <input type="time" id="timeTo" name="timeTo" required class="form-control  ml-2"
+                               placeholder="12:00" style="width: 200px">
+                    </div>
+                    <div class="row mt-3" style="margin-left: 300px">
+                        <button id="submit" type="submit" class="btn btn-success ml-2" style="width: 180px">
+                            Внеси
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row mt-5">
+                <h6 style="margin-left: 13px">Редовни консултации</h6>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Ден</th>
+                                <th scope="col">Од</th>
+                                <th scope="col">До</th>
+                                <th scope="col">Тема</th>
+                                <th scope="col">Пријавени учесници</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="event : ${events}" class="event">
+                                <td th:text="${event.getDay()}"></td>
+                                <td th:text="${event.getTimeFrom()}"></td>
+                                <td th:text="${event.timeTo}"></td>
+                                <td th:text="${event.getTitle()}"></td>
+                                <td th:text="${event.getEventAttendees().size() > 0}
+                            ? ${event.getEventAttendees().size()}
+                            : 'Нема пријавени учесници '"></td>
+                                <td class="text-center">
+                                    <form th:action="@{'/professor/delete/{id}' (id=${event.getId()})}"
+                                          th:method="POST">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i><span style="padding-left: 7px">Избриши</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
+

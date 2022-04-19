@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/" style="height: 47px"></a>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <h1 th:if="${hasError}" th:text="${error}"></h1>
+</div>
+<div class="container">
+    <form class="form-signin mt-xl-5 w-50" style="margin-left: 250px" method="post" action="/register">
+        <h2 class="form-signin-heading text-center">Register</h2>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control"
+                   placeholder="Username" required="" autofocus="">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control"
+                   placeholder="Password" required="">
+        </p>
+        <p>
+            <label for="repeatedPassword" class="sr-only">Repeat Password</label>
+            <input type="password" id="repeatedPassword" name="repeatedPassword"
+                   class="form-control" placeholder="Repeat Password" required="">
+        </p>
+        <p>
+            <label for="firstName" class="sr-only">Name</label>
+            <input type="text" id="firstName" name="firstName" class="form-control"
+                   placeholder="Name" required="" autofocus="">
+        </p>
+        <p>
+            <label for="lastName" class="sr-only">Surname</label>
+            <input type="text" id="lastName" name="lastName" class="form-control"
+                   placeholder="Surname" required="" autofocus="">
+        </p>
+        <p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="role" type="radio" id="ROLE_PROFESSOR" value="ROLE_PROFESSOR">
+            <label class="form-check-label" for="ROLE_PROFESSOR">PROFESSOR</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="role" type="radio" id="ROLE_USER" value="ROLE_USER">
+            <label class="form-check-label" for="ROLE_USER">USER</label>
+        </div>
+        </p>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+    <a href="/login" class="btn btn-block btn-light">Already have an account? Login here!</a>
+</div>
+
+</body>
+</html>
+
